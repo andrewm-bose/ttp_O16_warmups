@@ -1,0 +1,58 @@
+--ANSWERS
+-- get all customers whose first names contain 'dan' (eg Dan, Daniel, Jordan)
+SELECT *
+from customer 
+WHERE LOWER(first_name) LIKE '%dan%';
+
+-- get all customers whose last names contain 'dan' (eg Dan, Daniel, Jordan) 
+SELECT *
+from customer 
+WHERE LOWER(last_name) LIKE '%dan%';
+
+-- now add the results of the first query to the results of the second (UNION)
+(SELECT *
+from customer 
+WHERE LOWER(first_name) LIKE '%dan%')
+
+UNION 
+
+(SELECT *
+from customer 
+WHERE LOWER(last_name) LIKE '%dan%');
+
+-- find customers exist in both queries
+-- hint: there's one
+(SELECT *
+from customer 
+WHERE LOWER(first_name) LIKE '%dan%')
+
+INTERSECT
+
+(SELECT *
+from customer 
+WHERE LOWER(last_name) LIKE '%dan%');
+
+-- find all film with 'Fred' in the title
+SELECT *
+FROM film
+WHERE LOWER(title) LIKE '%fred%';
+
+--find all films that mention squirrels in the description
+SELECT *
+FROM film
+WHERE LOWER(description) LIKE '%squirrel%';
+
+--find the intersection of the two previous subqueries
+-- hint: there's two
+SELECT *
+FROM film
+WHERE LOWER(title) LIKE '%fred%'
+
+INTERSECT
+
+SELECT *
+FROM film
+WHERE LOWER(description) LIKE '%squirrel%';
+
+SELECT *
+FROM film;
